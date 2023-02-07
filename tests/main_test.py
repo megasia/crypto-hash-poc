@@ -4,7 +4,7 @@
 import unittest
 import main
 
-size_max_hash_truncate: int = 6
+size_max_hash_truncate: int = 5
 size_max_string: int = 8
 
 
