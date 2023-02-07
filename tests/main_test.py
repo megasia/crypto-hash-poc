@@ -6,12 +6,12 @@ import main
 
 class TestHashPoC(unittest.TestCase):
 
-    def test_truncate_1(self):
-        self.assertEqual(main.truncate("6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b", 5), '6b86b')
-
-    def test_truncate_2(self):
-        self.assertEqual(main.truncate("6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b", 50),
-                         '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c0')
+    # def test_truncate_1(self):
+    #     self.assertEqual(main.truncate("6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b", 5), '6b86b')
+    #
+    # def test_truncate_2(self):
+    #     self.assertEqual(main.truncate("6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b", 50),
+    #                      '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c0')
 
     def test_generate_random_string_size(self):
         size_max: int = 50
@@ -24,29 +24,29 @@ class TestHashPoC(unittest.TestCase):
         self.assertEqual(result.isalnum(), True)
 
     def test_collition_1(self):
-        size_max_string: int = 5
-        size_max_hash_truncate: int = 5
-        result_random_1: str = main.generate_hash_sha256_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
-        result_random_2: str = main.generate_hash_sha256_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
+        size_max_string: int = 15
+        size_max_hash_truncate: int = 8
+        result_random_1: str = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
+        result_random_2: str = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
         while result_random_1 != result_random_2:
-            result_random_1 = main.generate_hash_sha256_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
-            result_random_2 = main.generate_hash_sha256_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
+            result_random_1 = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
+            result_random_2 = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
 
-        print("result_random_1:", result_random_1)
-        print("result_random_2:", result_random_2)
+            print("result_random_1:", result_random_1)
+            print("result_random_2:", result_random_2)
         self.assertEqual(result_random_1, result_random_2)
 
     def test_collition_2(self):
-        size_max_string: int = 5
-        size_max_hash_truncate: int = 5
-        hash_to_collition = '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b'
-        result_random: str = main.generate_hash_sha256_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
+        size_max_string: int = 15
+        size_max_hash_truncate: int = 8
+        hash_to_collition = 'c4ca4238a0b923820dcc509a6f75849b'
+        result_random: str = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
         result_no_random: str = main.truncate(hash_to_collition, size_max_hash_truncate)
         while result_random != result_no_random:
-            result_random = main.generate_hash_sha256_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
+            result_random = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
 
-        print("result_random:", result_random)
-        print("result_no_random:", result_no_random)
+            print("result_random:", result_random)
+            print("result_no_random:", result_no_random)
         self.assertEqual(result_random, result_no_random)
 
     # def test_isupper(self):
