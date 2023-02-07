@@ -4,6 +4,8 @@
 import unittest
 import main
 
+size_max_hash_truncate: int = 4
+
 class TestHashPoC(unittest.TestCase):
 
     # def test_truncate_1(self):
@@ -25,7 +27,7 @@ class TestHashPoC(unittest.TestCase):
 
     def test_collition_1(self):
         size_max_string: int = 15
-        size_max_hash_truncate: int = 8
+        #size_max_hash_truncate: int = 8
         result_random_1: str = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
         result_random_2: str = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
         while result_random_1 != result_random_2:
@@ -38,7 +40,7 @@ class TestHashPoC(unittest.TestCase):
 
     def test_collition_2(self):
         size_max_string: int = 15
-        size_max_hash_truncate: int = 8
+        #size_max_hash_truncate: int = 8
         hash_to_collition = 'c4ca4238a0b923820dcc509a6f75849b'
         result_random: str = main.generate_hash_truncated(main.generate_random_string(size_max_string), size_max_hash_truncate)
         result_no_random: str = main.truncate(hash_to_collition, size_max_hash_truncate)
